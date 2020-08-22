@@ -12,7 +12,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: androidsdk/android-29
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
@@ -33,7 +33,10 @@ jobs:
       with:
         languages: java
 
-    - run: ./gradlew build
+    - name: "Build Android project"
+      uses: vgaidarji/android-github-actions-build@v1.0.1
+      with:
+        args: "./gradlew assemble"
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
